@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ResumeCraft — Resume Builder</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>ResumeCraft</h1>
+      <span>Build a professional A4 resume in minutes.</span>
+    </div>
+    <div class="top-actions">
+      <button class="btn ghost" id="clearBtn">Clear</button>
+      <button class="btn ghost" id="previewBtn">Preview Page</button>
+    </div>
+  </header>
+
+  <main class="app">
+    <section class="panel form-panel">
+      <form id="resumeForm">
+        <div class="form-section">
+          <h3>Personal Information</h3>
+          <div class="personal-fields">
+            <label>Full Name<input id="name" value="JORDAN A. SANTOS" placeholder="Your full name"></label>
+            <div class="grid-2">
+              <label>Phone<input id="phone" value="(555) 010-2048" placeholder="Phone number"></label>
+              <label>Email<input id="email" value="jordan.santos@example.com" placeholder="Email address"></label>
+            </div>
+            <label>Address<input id="address" value="123 Sample Street, Quezon City" placeholder="Address"></label>
+          </div>
+
+          <div class="photo-row">
+            <div class="photo-preview" id="photoThumb" role="button" tabindex="0" aria-label="Choose profile photo">
+              <span class="photo-placeholder">PHOTO</span>
+              <button type="button" class="photo-remove" id="removePhoto" aria-label="Remove profile photo">×</button>
+            </div>
+            <div>
+              <strong>Profile Photo</strong>
+              <p class="hint">Click the 1 × 1 inch box to upload JPG or PNG.</p>
+              <input type="file" id="photoInput" accept="image/png,image/jpeg" hidden>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h3>Objective</h3>
+          <textarea id="objective" rows="6">A motivated and persevering college student seeking work opportunities to learn, gain experience, and prepare for future career growth. Committed to balancing work and studies while continuously developing my skills and contributing efficiently to the team. I aim to apply my dedication and positive attitude to deliver quality results and support the goals of the organization.</textarea>
+        </div>
+
+        <div class="form-section">
+          <div class="section-title-row">
+            <h3>Education</h3>
+          </div>
+          <div id="educationList"></div>
+          <button type="button" class="add-btn section-add" data-add="education">+ Add education</button>
+        </div>
+
+        <div class="form-section">
+          <div class="section-title-row">
+            <h3>Experience</h3>
+          </div>
+          <div id="experienceList"></div>
+          <button type="button" class="add-btn section-add" data-add="experience">+ Add experience</button>
+        </div>
+
+        <div class="form-section">
+          <div class="section-title-row">
+            <h3>Skills</h3>
+          </div>
+          <div id="skillsList"></div>
+          <button type="button" class="add-btn section-add" data-add="skill">+ Add skill</button>
+        </div>
+
+        <div class="form-section">
+          <h3>Certification Statement</h3>
+          <textarea id="certification" rows="3">I hereby certify that the above information is true and correct to the best of my knowledge and belief.</textarea>
+        </div>
+      </form>
+
+    </section>
+
+    <section class="preview-area">
+      <div class="preview-toolbar">
+        <div class="preview-heading">
+          <span>Live Preview</span>
+          <span class="a4-label">A4 · 210 × 297 mm</span>
+        </div>
+        <div class="preview-actions">
+          <button class="btn primary" id="pdfBtn">Download PDF</button>
+          <button class="btn" id="docxBtn">Download DOCX</button>
+          <button class="btn" id="jpgBtn">Download JPG</button>
+          <button class="btn" id="printBtn">Print</button>
+        </div>
+      </div>
+      <div class="paper-wrap">
+        <article class="resume-paper" id="resumePaper">
+          <header class="resume-header">
+            <div class="header-text">
+              <h1 id="rName">JORDAN A. SANTOS</h1>
+              <div class="contact" id="rContact"></div>
+            </div>
+            <img id="rPhoto" class="resume-photo hidden" alt="Profile photo">
+          </header>
+
+          <section class="resume-section" id="objectiveSection">
+            <h2>OBJECTIVE</h2>
+            <p id="rObjective"></p>
+          </section>
+
+          <section class="resume-section" id="educationSection">
+            <h2>EDUCATION</h2>
+            <div id="rEducation"></div>
+          </section>
+
+          <section class="resume-section" id="experienceSection">
+            <h2>EXPERIENCE</h2>
+            <div id="rExperience"></div>
+          </section>
+
+          <section class="resume-section" id="skillsSection">
+            <h2>SKILLS</h2>
+            <div id="rSkills"></div>
+          </section>
+
+          <div class="certification" id="rCertification"></div>
+          <div class="signature-block">
+            <div class="signature-line"></div>
+            <div class="signature-name" id="rSignatureName"></div>
+            <div class="signature-caption">Signature over printed name</div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <template id="educationTemplate">
+    <div class="repeat-card">
+      <button type="button" class="remove-btn">×</button>
+      <div class="grid-2">
+        <label>School<input class="school" placeholder="School / University"></label>
+        <label>Course<input class="course" placeholder="Degree / Course"></label>
+      </div>
+      <label>Year / Status<input class="year" placeholder="e.g. PRESENT"></label>
+    </div>
+  </template>
+
+  <template id="experienceTemplate">
+    <div class="repeat-card">
+      <button type="button" class="remove-btn">×</button>
+      <div class="grid-2">
+        <label>Position<input class="position" placeholder="Job title"></label>
+        <label>Company<input class="company" placeholder="Company"></label>
+      </div>
+      <label>Dates<input class="dates" placeholder="e.g. 2025 – PRESENT"></label>
+      <label>Description<textarea class="description" rows="3" placeholder="What did you do?"></textarea></label>
+    </div>
+  </template>
+
+  <template id="skillTemplate">
+    <div class="repeat-card skill-card">
+      <button type="button" class="remove-btn">×</button>
+      <label>Skill<input class="skill-name" placeholder="e.g. Communication skills"></label>
+      <label>Description<textarea class="skill-description" rows="2" placeholder="Brief description"></textarea></label>
+    </div>
+  </template>
+
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docx@9.5.1/build/index.umd.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
