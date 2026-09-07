@@ -97,8 +97,8 @@ button, input, textarea { font:inherit; }
 .form-section:first-of-type { border-top:0; padding-top:0; }
 .form-section:first-of-type {
   display:grid;
-  grid-template-columns:minmax(0, 1fr) 190px;
-  column-gap:20px;
+  grid-template-columns:minmax(0, 1fr) 150px;
+  column-gap:16px;
 }
 .form-section:first-of-type h3 { grid-column:1 / -1; }
 .form-section:first-of-type .personal-fields { grid-column:1; grid-row:2; }
@@ -115,7 +115,7 @@ button, input, textarea { font:inherit; }
   align-items:stretch;
   gap:8px;
   margin-top:2px;
-  padding-left:16px;
+  padding-left:12px;
   border-left:1px solid var(--line-soft);
 }
 .form-section:first-of-type .photo-row > div:last-child { min-width:0; }
@@ -207,7 +207,7 @@ textarea:required:placeholder-shown:focus {
 .photo-row { display:flex; gap:14px; align-items:center; margin-top:16px; }
 .photo-preview {
   position:relative;
-  width:112px; height:112px;
+  width:96px; height:96px;
   border:1.5px dashed #b7c0ba;
   border-radius:8px;
   display:grid; place-items:center;
